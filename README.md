@@ -19,20 +19,55 @@ It is similar in concept and use to the `debug` log level that many loggers
 provide. A way of making notes and annotations to the code that appear at
 runtime.
 
+
+### Getting A Jotter Instance
+
 The `Jotter` instance can be created manually, or a global instance can be used
 via the top level functions. `Jotter` wraps an instance of `Printer`, which can
 be any object that implements `Print`, `Printf` and `Println` in the same way as
 the `fmt` package. Coincidentally the `log.Logger` type also conforms to this
 interface.
 
+```go
+
+logger := log.New(os.Stderr, "", 0)
+
+jotter := jot.New(logger)
+
+```
+
+By default a standard `Jotter` instance is created using a `log.Logger` instance
+configured to write to Stderr and use standard log formatting. Override this by
+called `SetPrinter` and pass in a custom `Printer` instance.
+
+
+### Enabling Jotter
+
 The `Jotter` instance can be enabled by called `Enable()` on it, or the on the
 package to enable the standard `Jotter`. It can be turned off again by calling
 `Disable()`. This is useful for being able to turn on `Jotter` at runtime via
 some secret API call.
 
-By default a standard `Jotter` instance is created using a `log.Logger` instance
-configured to write to Stderr and use standard log formatting. Override this by
-called `SetPrinter` and pass in a custom `Printer` instance.
+```go
+
+jot.Enable()
+
+jot.Print("This is printer")
+
+jot.Disable()
+
+jot.Print("This is not")
+
+```
+
+Alternatively the standard `Jotter` can be enabled by setting the environment
+variable `JOTTER_ENABLE` to `true`.
+
+    export JOTTER_ENABLE=true
+    my_program
+
+
+### Example
 
 ```go
 
@@ -56,6 +91,8 @@ In this example the log line will be printed in case of error as is proper, but
 the jot lines are only printed if the standard `Jotter` instance is enabled.
 This ensures that noisy log lines that only help developers can be avoided
 unless absolutely required.
+
+### The
 
 ## Usage
 

@@ -1,6 +1,7 @@
 package jot
 
 import (
+	"os"
 	"reflect"
 	"testing"
 )
@@ -105,5 +106,29 @@ func TestPrintlnDisabled(t *testing.T) {
 
 	if p.printlnCalled {
 		t.Fatal("Expected printer to not be called")
+	}
+}
+
+func TestDisabledByDefault(t *testing.T) {
+	os.Setenv("ENABLE_JOTTER", "")
+	p := &TestPrinter{}
+	j := New(p)
+
+	j.Print("Some", "values", "passed", "in")
+
+	if p.printCalled {
+		t.Fatal("Expected printer not to be called")
+	}
+}
+
+func TestEnabledWithEnvVar(t *testing.T) {
+	os.Setenv("ENABLE_JOTTER", "true")
+	p := &TestPrinter{}
+	j := New(p)
+
+	j.Print("Some", "values", "passed", "in")
+
+	if !p.printCalled {
+		t.Fatal("Expected printer to be called")
 	}
 }
