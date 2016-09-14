@@ -1,0 +1,17 @@
+# Jot
+
+Install:
+
+```
+go get {{ .ImportPath}}
+```
+
+Use:
+
+```go
+import "{{ .ImportPath }}"
+```
+
+{{ .EmitSynopsis }}
+
+{{ .EmitUsage }}
