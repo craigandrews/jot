@@ -9,7 +9,7 @@ Getting A Jotter Instance
 The `Jotter` instance can be created manually, or a global instance can be used
 via the top level functions. `Jotter` wraps an instance of `Printer`, which can
 be any object that implements `Print`, `Printf` and `Println` in the same way as
-the `fmt` package. Coincidentally the `log.Logger` type also conforms to this
+the `fmt` package. Coincidentally the `log.Logger` type conforms to this
 interface.
 
 	logger := log.New(os.Stderr, "", 0)

@@ -12,20 +12,16 @@ Use:
 import "github.com/doozr/jot"
 ```
 
-Package jot contains a simple logger for developers making notes during
-development.
-
-It is similar in concept and use to the `debug` log level that many loggers
-provide. A way of making notes and annotations to the code that appear at
-runtime.
-
+Jot is a simple logger for developers making notes during development. It is
+similar in concept and use to the `debug` log level that many loggers provide. A
+way of making notes and annotations to the code that appear at runtime.
 
 ### Getting A Jotter Instance
 
 The `Jotter` instance can be created manually, or a global instance can be used
 via the top level functions. `Jotter` wraps an instance of `Printer`, which can
 be any object that implements `Print`, `Printf` and `Println` in the same way as
-the `fmt` package. Coincidentally the `log.Logger` type also conforms to this
+the `fmt` package. Coincidentally the `log.Logger` type conforms to this
 interface.
 
 ```go
