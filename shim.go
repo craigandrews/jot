@@ -2,20 +2,20 @@ package jot
 
 import "log"
 
-// logShim is an empty object that serves as a way to instantiate the standard logger
-type logShim struct{}
+// LoggerShim is an empty object that serves as a way to instantiate the standard logger.
+type LoggerShim struct{}
 
-// Print forwards to log.Print
-func (l logShim) Print(v ...interface{}) {
+// Print forwards to log.Print.
+func (l LoggerShim) Print(v ...interface{}) {
 	log.Print(v...)
 }
 
-// Printf forwards to log.Printf
-func (l logShim) Printf(format string, v ...interface{}) {
+// Printf forwards to log.Printf.
+func (l LoggerShim) Printf(format string, v ...interface{}) {
 	log.Printf(format, v...)
 }
 
-// Println forwards to log.Println
-func (l logShim) Println(v ...interface{}) {
+// Println forwards to log.Println.
+func (l LoggerShim) Println(v ...interface{}) {
 	log.Println(v...)
 }

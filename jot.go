@@ -6,7 +6,7 @@ package jot
 
 var jotter = Jotter{
 	enabled: false,
-	printer: logShim{},
+	printer: LoggerShim{},
 }
 
 // SetPrinter changes the Printer instance used by the standard Jotter.
