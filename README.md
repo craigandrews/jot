@@ -20,7 +20,7 @@ It is similar in concept and use to the `debug` log level that
 many loggers provide. A way of making annotations in the code that appear in the
 logs at runtime.
 
-See the [API documentatin](API.md) for more detail.
+See the [API documentation](API.md) for more detail.
 
 ### Getting A Jotter Instance
 
