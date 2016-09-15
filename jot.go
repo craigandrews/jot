@@ -14,6 +14,11 @@ func SetPrinter(printer Printer) {
 	jotter.printer = printer
 }
 
+// Enabled returns true if the standard Jotter is enabled.
+func Enabled() bool {
+	return jotter.Enabled()
+}
+
 // Enable output from the standard Jotter.
 func Enable() {
 	jotter.Enable()

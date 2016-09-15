@@ -21,8 +21,8 @@ func New(printer Printer) *Jotter {
 	}
 }
 
-// isEnabled performs all necessary checks for whether Jotter should print.
-func (j *Jotter) isEnabled() bool {
+// Enabled returns true if this Jotter is enabled.
+func (j *Jotter) Enabled() bool {
 	return j.enabled
 }
 
@@ -39,7 +39,7 @@ func (j *Jotter) Disable() {
 // Print via the wrapped Printer if enabled.
 // Arguments are handled in the manner of fmt.Print.
 func (j *Jotter) Print(v ...interface{}) {
-	if j.isEnabled() {
+	if j.Enabled() {
 		j.printer.Print(v...)
 	}
 }
@@ -47,7 +47,7 @@ func (j *Jotter) Print(v ...interface{}) {
 // Printf via the wrapped Printer if enabled.
 // Arguments are handled in the manner of fmt.Printf.
 func (j *Jotter) Printf(format string, v ...interface{}) {
-	if j.isEnabled() {
+	if j.Enabled() {
 		j.printer.Printf(format, v...)
 	}
 }
@@ -55,7 +55,7 @@ func (j *Jotter) Printf(format string, v ...interface{}) {
 // Println via the wrapped Printer if enabled.
 // Arguments are handled in the manner of fmt.Println.
 func (j *Jotter) Println(v ...interface{}) {
-	if j.isEnabled() {
+	if j.Enabled() {
 		j.printer.Println(v...)
 	}
 }

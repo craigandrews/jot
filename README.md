@@ -12,9 +12,13 @@ Use:
 import "github.com/doozr/jot"
 ```
 
-Jot is a simple logger for developers making notes during development. It is
-similar in concept and use to the `debug` log level that many loggers provide. A
-way of making notes and annotations to the code that appear at runtime.
+Jot is a simple logger for developers making notes during development. Like
+writing notes in the margin or keeping a log of execution, it allows a more detailed record of what is actually going on that the normal logger may not
+need to provide.
+
+It is similar in concept and use to the `debug` log level that
+many loggers provide. A way of making annotations in the code that appear in the
+logs at runtime.
 
 See the [API documentatin](API.md) for more detail.
 
@@ -75,23 +79,53 @@ export JOTTER_ENABLE=true
 my_program
 ```
 
-### Example
+### Conditional Jotting
+
+Sometimes it may be desirable to defer jotting a particular message unless the Jotter is definitely enabled. This could be because it takes a significant time to calculate the thing being jotted that is unnecessary in normal execution. This is handled by checking the Jotter status with the `Enabled` method.
 
 ```go
-jot.Print("Calling connectToThing", someParam)
-jot.Printf("User: %s ACL: %s", user, acl)
-result, err := connectToThing(someParam)
-
-if err != nil {
-	log.Printf("Error connecting to thing with %s: %v", someParam, err)
-}
-
-if (result == "specific value of interest to developer") {
-	jot.Printf("TRACER: weird result occurred")
+if jot.Enabled() {
+	jot.Print("Result of claculation: ", longRunningCalculation())
 }
 ```
 
-In this example the log line will be printed in case of error as is proper, but
-the jot lines are only printed if the standard `Jotter` instance is enabled.
-This ensures that noisy log lines that only help developers can be avoided
-unless absolutely required.
+### Example
+
+```go
+func listen(client Client, ch chan Message,
+			done chan struct{}, wg *sync.WaitGroup) {
+	jot.Print("Started forwardMessage")
+	defer func() {
+		jot.Print("Finished forwardMessage")
+		wg.Done()
+	}()
+
+	for {
+		select {
+		case <-done:
+			jot.Print("forwardMessage detected done channel close")
+			return
+		default:
+			message, err := client.Read()
+			if err != nil {
+				log.Print("Error reading from client: ", err)
+				return
+			}
+			log.Printf(
+				"Received message %d from %s to %s",
+				message.ID, message.From, message.To)
+			jot.Printf(
+				"Message id: %d body: %s route: %s",
+				message.ID, message.Text, message.Route)
+
+			ch <- message
+		}
+	}
+}
+```
+
+In this example the `log` lines will be printed on message arrival and in case
+of error as is proper. The `jot` lines only appear if the standard Jotter is
+enabled, and can be used to help debug message or synchronisation issues. If the
+standard Jotter is disabled they get out of the way to ensure the normal
+operational logs are clear and concise.

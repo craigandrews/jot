@@ -6,16 +6,16 @@ import "log"
 type logShim struct{}
 
 // Print forwards to log.Print
-func (_ logShim) Print(v ...interface{}) {
+func (l logShim) Print(v ...interface{}) {
 	log.Print(v...)
 }
 
 // Printf forwards to log.Printf
-func (_ logShim) Printf(format string, v ...interface{}) {
+func (l logShim) Printf(format string, v ...interface{}) {
 	log.Printf(format, v...)
 }
 
 // Println forwards to log.Println
-func (_ logShim) Println(v ...interface{}) {
+func (l logShim) Println(v ...interface{}) {
 	log.Println(v...)
 }
