@@ -12,6 +12,7 @@ Use:
 import "github.com/doozr/jot"
 ```
 
+<img align="right" width="240" style="margin: 12px" src="jot.png">
 Jot is a simple logger for developers making notes during development. Like
 writing notes in the margin or keeping a log of execution, it allows a more
 detailed record of what is actually going on that the normal logger may provide.
