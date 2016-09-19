@@ -1,7 +1,7 @@
 # Jot
 
-<img align="right" width="240" style="margin: 12px" src="jot.png">
-Install:
+Install:<img align="right" width="180" style="margin: 12px" src="https://cdn.rawgit.com/doozr/jot/master/jot.svg">
+
 
 ```
 go get github.com/doozr/jot
