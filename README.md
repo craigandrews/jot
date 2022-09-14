@@ -4,13 +4,13 @@ Install:<img align="right" width="180" style="margin: 12px" src="jot.svg">
 
 
 ```
-go get github.com/doozr/jot
+go get github.com/craigandrews/jot
 ```
 
 Use:
 
 ```go
-import "github.com/doozr/jot"
+import "github.com/craigandrews/jot"
 ```
 
 Jot is a simple logger for developers making notes during development. Like
