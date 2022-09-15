@@ -4,9 +4,11 @@
 // via the `log.Print*` functions.
 package jot
 
+import "log"
+
 var jotter = Jotter{
 	enabled: false,
-	printer: LoggerShim{},
+	printer: log.Default(),
 }
 
 // SetPrinter changes the Printer instance used by the standard Jotter.
